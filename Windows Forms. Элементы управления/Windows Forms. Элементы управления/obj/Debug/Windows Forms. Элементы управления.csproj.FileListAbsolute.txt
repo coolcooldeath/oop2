@@ -1,0 +1,10 @@
+C:\Users\User\source\repos\Windows Forms. Элементы управления\Windows Forms. Элементы управления\bin\Debug\Windows_Forms.Элементы_управления.exe.config
+C:\Users\User\source\repos\Windows Forms. Элементы управления\Windows Forms. Элементы управления\bin\Debug\Windows_Forms.Элементы_управления.exe
+C:\Users\User\source\repos\Windows Forms. Элементы управления\Windows Forms. Элементы управления\bin\Debug\Windows_Forms.Элементы_управления.pdb
+C:\Users\User\source\repos\Windows Forms. Элементы управления\Windows Forms. Элементы управления\obj\Debug\Windows Forms. Элементы управления.csprojAssemblyReference.cache
+C:\Users\User\source\repos\Windows Forms. Элементы управления\Windows Forms. Элементы управления\obj\Debug\Windows_Forms.Элементы_управления.Form1.resources
+C:\Users\User\source\repos\Windows Forms. Элементы управления\Windows Forms. Элементы управления\obj\Debug\Windows_Forms.Элементы_управления.Properties.Resources.resources
+C:\Users\User\source\repos\Windows Forms. Элементы управления\Windows Forms. Элементы управления\obj\Debug\Windows Forms. Элементы управления.csproj.GenerateResource.cache
+C:\Users\User\source\repos\Windows Forms. Элементы управления\Windows Forms. Элементы управления\obj\Debug\Windows Forms. Элементы управления.csproj.CoreCompileInputs.cache
+C:\Users\User\source\repos\Windows Forms. Элементы управления\Windows Forms. Элементы управления\obj\Debug\Windows_Forms.Элементы_управления.exe
+C:\Users\User\source\repos\Windows Forms. Элементы управления\Windows Forms. Элементы управления\obj\Debug\Windows_Forms.Элементы_управления.pdb

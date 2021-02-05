@@ -1,0 +1,10 @@
+C:\Users\User\source\repos\Калькулятор Бинарный\Калькулятор Бинарный\bin\Debug\Калькулятор Бинарный.exe.config
+C:\Users\User\source\repos\Калькулятор Бинарный\Калькулятор Бинарный\bin\Debug\Калькулятор Бинарный.exe
+C:\Users\User\source\repos\Калькулятор Бинарный\Калькулятор Бинарный\bin\Debug\Калькулятор Бинарный.pdb
+C:\Users\User\source\repos\Калькулятор Бинарный\Калькулятор Бинарный\obj\Debug\Калькулятор Бинарный.csprojAssemblyReference.cache
+C:\Users\User\source\repos\Калькулятор Бинарный\Калькулятор Бинарный\obj\Debug\Калькулятор_Бинарный.Form1.resources
+C:\Users\User\source\repos\Калькулятор Бинарный\Калькулятор Бинарный\obj\Debug\Калькулятор_Бинарный.Properties.Resources.resources
+C:\Users\User\source\repos\Калькулятор Бинарный\Калькулятор Бинарный\obj\Debug\Калькулятор Бинарный.csproj.GenerateResource.cache
+C:\Users\User\source\repos\Калькулятор Бинарный\Калькулятор Бинарный\obj\Debug\Калькулятор Бинарный.csproj.CoreCompileInputs.cache
+C:\Users\User\source\repos\Калькулятор Бинарный\Калькулятор Бинарный\obj\Debug\Калькулятор Бинарный.exe
+C:\Users\User\source\repos\Калькулятор Бинарный\Калькулятор Бинарный\obj\Debug\Калькулятор Бинарный.pdb
