@@ -18,8 +18,23 @@ namespace Windows_Forms.Элементы_управления
     public partial class Form1 : Form
     {
         static Processor Processor = new Processor();
+        string type, RAMType, DiskType;
+        DateTime Date;
+        int RAM, Disk;
+        Videocard videocard1 = new GtxVideocard();
         
-        Computer Computer = new Computer(Processor);
+        
+
+
+
+        static Builder builder = new Builder();
+        ComputerDirector ComputerDirector = new ComputerDirector(builder);
+
+
+        DezignDirector dezignDirector = new DezignDirector();
+        
+
+
         Computer[] comp = new Computer[10];
         Processor[] proc = new Processor[10];
         int priceComp = 0;
@@ -32,47 +47,47 @@ namespace Windows_Forms.Элементы_управления
             
             InitializeComponent();
 
-            
+            dezignDirector.Start(Color.AliceBlue, Color.BlanchedAlmond);
             comboBox1.Click += delegate
             {
-                comboBox1.BackColor = Color.White;
+                comboBox1.BackColor = dezignDirector.userDezign.ClearColor;
 
             };
             comboBox2.Click += delegate
             {
-                comboBox2.BackColor = Color.White;
+                comboBox2.BackColor = dezignDirector.userDezign.ClearColor;
 
             };
             textBox1.Click += delegate
             {
-                textBox1.BackColor = Color.White;
+                textBox1.BackColor = dezignDirector.userDezign.ClearColor;
                 textBox1.Clear();
             };
             textBox2.Click += delegate
             {
-                textBox2.BackColor = Color.White;
+                textBox2.BackColor = dezignDirector.userDezign.ClearColor;
                 textBox2.Clear();
 
             };
             textBox3.Click += delegate
             {
-                textBox3.BackColor = Color.White;
+                textBox3.BackColor = dezignDirector.userDezign.ClearColor;
                 textBox3.Clear();
             };
             
             textBox5.Click += delegate
             {
-                textBox5.BackColor = Color.White;
+                textBox5.BackColor = dezignDirector.userDezign.ClearColor;
                 textBox5.Clear();
             };
             numericUpDown1.Click += delegate
             {
-                numericUpDown1.BackColor = Color.White;
+                numericUpDown1.BackColor = dezignDirector.userDezign.ClearColor;
 
             };
             numericUpDown2.Click += delegate
             {
-                numericUpDown2.BackColor = Color.White;
+                numericUpDown2.BackColor = dezignDirector.userDezign.ClearColor;
 
             };
 
@@ -104,98 +119,106 @@ namespace Windows_Forms.Элементы_управления
 
         private void button1_Click(object sender, EventArgs e)
         {
-            
+            videocard1 = new GTX(videocard1);
+            label25.Text = videocard1.Name;
+            videocard1.Cost = 1000;
+            Memento memento = videocard1.SaveState();
+            videocard1.Cost -= 100;
+            MessageBox.Show("Сохраненная цена - "+memento.Cost);
+            MessageBox.Show("Новая цена - "+ videocard1.Cost);
+
             StringBuilder StrBldr = new StringBuilder();
 
             if (numericUpDown1.Value == 0)
             {
-                numericUpDown1.BackColor = Color.Red;
+                numericUpDown1.BackColor = dezignDirector.userDezign.ErrorColor;
 
             }
             if (numericUpDown2.Value == 0)
             {
-                numericUpDown2.BackColor = Color.Red;
+                numericUpDown2.BackColor = dezignDirector.userDezign.ErrorColor;
 
             }
             if (comboBox1.Text == "")
             {
-                comboBox1.BackColor = Color.Red;
+                comboBox1.BackColor = dezignDirector.userDezign.ErrorColor;
 
             }
             if (comboBox2.Text == "")
             {
-                comboBox2.BackColor = Color.Red;
+                comboBox2.BackColor = dezignDirector.userDezign.ErrorColor;
 
             }
             if (textBox1.TextLength == 0) {
-                textBox1.BackColor = Color.Red;
+                textBox1.BackColor = dezignDirector.userDezign.ErrorColor;
                 textBox1.Text = "Нет значений";
             }
             if (textBox2.TextLength == 0)
             {
-                textBox2.BackColor = Color.Red;
+                textBox2.BackColor = dezignDirector.userDezign.ErrorColor;
                 textBox2.Text = "Нет значений";
 
             }
             if (textBox3.TextLength == 0)
             {
-                textBox3.BackColor = Color.Red;
+                textBox3.BackColor = dezignDirector.userDezign.ErrorColor;
                 textBox3.Text = "Нет значений";
             }
            
             if (textBox5.TextLength == 0)
             {
-                textBox5.BackColor = Color.Red;
+                textBox5.BackColor = dezignDirector.userDezign.ErrorColor;
                 textBox5.Text = "Нет значений";
             }
 
-            StrBldr.AppendLine("Модель процессора - " + Computer.processor.model);
-            StrBldr.AppendLine("Тип компьютера  - " + Computer.type);
-            StrBldr.AppendLine("ОЗУ  - " + Computer.RAM);
-            StrBldr.AppendLine("Тип ОЗУ - " + Computer.RAMType);
-            StrBldr.AppendLine("Тип диска  - " + Computer.DiskType);
-            StrBldr.AppendLine("Размер диска  - " + Computer.Disk);
-            StrBldr.AppendLine("Дата приобретения - " + Computer.Date);
-            StrBldr.AppendLine("Количество ядер процессора - " + Computer.processor.numEd);
-            StrBldr.AppendLine("Создатель процессора - " + Computer.processor.creator);
-            StrBldr.AppendLine("Серия процессора - " + Computer.processor.serialNum);
-            StrBldr.AppendLine("Частота процессора - " + Computer.processor.freq);
-            StrBldr.AppendLine("Максимальная частота процессора - " + Computer.processor.maxFreq);
+            StrBldr.AppendLine("Модель процессора - " + Processor.model);
+            StrBldr.AppendLine("Тип компьютера  - " + type);
+            StrBldr.AppendLine("ОЗУ  - " + RAM);
+            StrBldr.AppendLine("Тип ОЗУ - " + RAMType);
+            StrBldr.AppendLine("Тип диска  - " + DiskType);
+            StrBldr.AppendLine("Размер диска  - " + Disk);
+            StrBldr.AppendLine("Дата приобретения - " + Date);
+            StrBldr.AppendLine("Количество ядер процессора - " + Processor.numEd);
+            StrBldr.AppendLine("Создатель процессора - " + Processor.creator);
+            StrBldr.AppendLine("Серия процессора - " + Processor.serialNum);
+            StrBldr.AppendLine("Частота процессора - " + Processor.freq);
+            StrBldr.AppendLine("Максимальная частота процессора - " + Processor.maxFreq);
+           
             if (radioButton2.Checked)
             {
-                Computer.processor.Architech = 32;
-                StrBldr.AppendLine("Разрядность архитектуры- " + Computer.processor.Architech);
+               
+                Processor.Architech= new Architech(StateArchitecture.X32);
+                StrBldr.AppendLine("Разрядность архитектуры- " + Processor.Architech.GetResult());
             }
             else if (radioButton3.Checked)
             {
-                Computer.processor.Architech = 64;
-                StrBldr.AppendLine("Разрядность архитектуры- " + Computer.processor.Architech);
+                Processor.Architech = new Architech(StateArchitecture.X64);
+                StrBldr.AppendLine("Разрядность архитектуры- " + Processor.Architech.GetResult());
             }
+            ComputerDirector.BuildComputer(Date,Processor,RAMType,type,RAM,DiskType,Disk);
+             Computer Computer =  builder.GetResult();
 
             Validata validata = new Validata();
             
-            if(validata.Validater(Computer.processor)) {
-                if (Regex.Match(Computer.type, @"^[A-Za-z]+$").Success)
+            if(validata.Validater(Processor)) {
+                if (Regex.Match(type, @"^[A-Za-z]+$").Success)
                 {
-                    if (Regex.Match(Computer.RAMType, @"^[A-Za-z]+$").Success)
+                    if (Regex.Match(RAMType, @"^[A-Za-z]+$").Success)
                     {
                         MessageBox.Show("Валидация пройдена");
                         label1.Text = Convert.ToString(StrBldr);
                         Serializer serializer = new Serializer();
                         serializer.MyXMLSerializer<Computer>(Computer, "Computer" + it + ".xml");
+                      /*  serializer.MyXMLSerializer<Computer>(Computer.Clone(), "ComputerClone " + it + ".xml");*/
                         serializer.MyXMLSerializer<Processor>(Computer.processor, "Processor" + it + ".xml");
 
                         for (int i = 0; i <= it; i++)
                         {
                             comp[i] = serializer.MyXMLDeserializer<Computer>(Computer, "Computer" + i + ".xml");
-                            proc[i] = serializer.MyXMLProcDeserializer<Processor>(Processor, "Processor" + i + ".xml");
+                            proc[i] = serializer.MyXMLProcDeserializer<Processor>(Computer.processor, "Processor" + i + ".xml");
 
                         }
-                        for (int i = 0; i <= it; i++)
-                        {
-                            Console.WriteLine(proc[i].creator + proc[i].Architech);
-
-                        }
+                        
 
                         it++;
                     }
@@ -211,7 +234,7 @@ namespace Windows_Forms.Элементы_управления
 
         private void textBox3_TextChanged(object sender, EventArgs e)
         {
-            Computer.type = textBox3.Text;
+            type = textBox3.Text;
 
         }
 
@@ -222,7 +245,7 @@ namespace Windows_Forms.Элементы_управления
 
         private void numericUpDown1_ValueChanged(object sender, EventArgs e)
         {
-            Computer.RAM = (int)numericUpDown1.Value;
+            RAM = (int)numericUpDown1.Value;
         }
 
         private void label5_Click(object sender, EventArgs e)
@@ -232,12 +255,12 @@ namespace Windows_Forms.Элементы_управления
 
         private void textBox2_TextChanged(object sender, EventArgs e)
         {
-            Computer.RAMType = textBox2.Text;
+            RAMType = textBox2.Text;
         }
 
         private void numericUpDown2_ValueChanged(object sender, EventArgs e)
         {
-            Computer.Disk = (int)numericUpDown2.Value;
+            Disk = (int)numericUpDown2.Value;
         }
 
         private void label7_Click(object sender, EventArgs e)
@@ -249,7 +272,7 @@ namespace Windows_Forms.Элементы_управления
 
         private void dateTimePicker1_ValueChanged(object sender, EventArgs e)
         {
-            Computer.Date = dateTimePicker1.Value;
+            Date = dateTimePicker1.Value;
         }
 
 
@@ -266,7 +289,7 @@ namespace Windows_Forms.Элементы_управления
 
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
-            Computer.processor.numEd = Convert.ToInt32(comboBox1.SelectedItem.ToString());
+           Processor.numEd = Convert.ToInt32(comboBox1.SelectedItem.ToString());
 
         }
 
@@ -277,13 +300,13 @@ namespace Windows_Forms.Элементы_управления
 
         private void comboBox2_SelectedIndexChanged(object sender, EventArgs e)
         {
-            Computer.processor.creator = comboBox2.SelectedItem.ToString();
+            Processor.creator = comboBox2.SelectedItem.ToString();
             countComp = (int)numericUpDown3.Value;
         }
 
         private void textBox5_TextChanged(object sender, EventArgs e)
         {
-            try { Computer.processor.serialNum = Convert.ToInt32(textBox5.Text); }
+            try { Processor.serialNum = Convert.ToInt32(textBox5.Text); }
             catch {
 
                 textBox5.Clear();
@@ -293,7 +316,7 @@ namespace Windows_Forms.Элементы_управления
 
         private void listBox1_SelectedIndexChanged_1(object sender, EventArgs e)
         {
-            Computer.processor.freq = Convert.ToInt32(listBox1.SelectedItem.ToString());
+          Processor.freq = Convert.ToInt32(listBox1.SelectedItem.ToString());
         }
 
         private void numericUpDown3_ValueChanged(object sender, EventArgs e)
@@ -336,13 +359,13 @@ namespace Windows_Forms.Элементы_управления
 
         private void button2_Click_1(object sender, EventArgs e)
         {
-            if (Computer.processor.creator == "IBM")
+            if (Processor.creator == "IBM")
                 priceComp = 1000;
-            if (Computer.processor.creator == "Microsoft")
+            if (Processor.creator == "Microsoft")
                 priceComp = 2000;
-            if (Computer.processor.creator == "BogdevichInd")
+            if (Processor.creator == "BogdevichInd")
                 priceComp = 4;
-            if (Computer.processor.creator == "SergioComp")
+            if (Processor.creator == "SergioComp")
                 priceComp = 3;
             label15.Text = ("Цена компьютера - " + priceComp + "\n" + "Общая цена - " + priceComp * countComp);
         }
@@ -370,14 +393,12 @@ namespace Windows_Forms.Элементы_управления
 
         private void button3_Click_1(object sender, EventArgs e)
         {
-            for (int i = 0; i <= it; i++)
-            {
-                File.Delete("Computer" + i + ".xml");
-                File.Delete("Processor" + i + ".xml");
-
-            }
-
-            Application.Exit();
+            Button button = new Button();
+            App app = new App();
+            button.SetCommand(new AppOnComand(app));
+            button.PressButton(it);
+            button.PressUndo();
+            
         }
 
         private void button6_Click(object sender, EventArgs e)
@@ -531,7 +552,7 @@ namespace Windows_Forms.Элементы_управления
 
         private void comboBox3_SelectedIndexChanged(object sender, EventArgs e)
         {
-            Computer.DiskType = comboBox3.SelectedItem.ToString();
+           DiskType = comboBox3.SelectedItem.ToString();
         }
 
         private void contextMenuStrip1_Opening(object sender, CancelEventArgs e)
@@ -540,6 +561,11 @@ namespace Windows_Forms.Элементы_управления
         }
 
         private void menuStrip1_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
+        {
+
+        }
+
+        private void label25_Click(object sender, EventArgs e)
         {
 
         }
@@ -564,36 +590,147 @@ namespace Windows_Forms.Элементы_управления
             MessageBox.Show(it + " Объектов\n" + DateTime.Now + " Время\n");
         }
     }
+    //builder
+    public interface IComputerBuilder
+    {
+       
+        void BuildProc(Processor processor);
+        void BuildDate(DateTime time);
+        void BuildRam(string RAMType);
+        void BuildRam(int RAM);
+   
+        void BuildDisk(string DiskType);
+        void BuildDisk(int Disk);
+        void BuildType(string Type);
+       
+    }
+    public class Builder : IComputerBuilder
+    {
+        private readonly Computer _computer = new Computer();
+
+        public void BuildDate(DateTime time)
+        {
+            this._computer.Date = time;
+        }
+
+        public void BuildDisk(string DiskType)
+        {
+            this._computer.DiskType = DiskType;
+        }
+    
+
+        public void BuildDisk(int Disk)
+        {
+            this._computer.Disk= Disk;
+        }
+
+        public void BuildProc(Processor processor)
+        {
+            this._computer.processor = processor;
+        }
+
+        public void BuildProc(string Proc)
+        {
+            this._computer.proc = Proc;
+        }
+
+        public void BuildRam(string RAMType)
+        {
+            this._computer.RAMType = RAMType;
+        }
+        public void BuildRam(int RAM)
+        {
+            this._computer.RAM = RAM;
+        }
+
+        public void BuildType(string Type)
+        {
+            this._computer.type = Type;
+        }
+
+        public void BuildVideoCard(string videocard)
+        {
+            this._computer.videocard = videocard;
+        }
+        
+
+        public Computer GetResult() { return this._computer; }
+
+    }
+    public class ComputerDirector {
+
+        private readonly IComputerBuilder _computerBuilder;
+        public ComputerDirector(IComputerBuilder computerBuilder)
+        {
+            this._computerBuilder = computerBuilder;
+        }
+      /*  private Processor GetProcessor(int Id) { return null; }
+        private DateTime GetDate(int Id) { return DateTime.Now; }
+        private string GetVideoCard(int Id) { return null; }
+        private string GetRam(int Id) { return null; }*/
+        public void BuildComputer(DateTime dateTime,Processor processor,string RamType,string type,int Ram,string DiskType,int Disk)
+        {
+            this._computerBuilder.BuildDate(dateTime);// изменить методы добавления
+            this._computerBuilder.BuildProc(processor);
+            this._computerBuilder.BuildRam(Ram);
+            this._computerBuilder.BuildRam(RamType);
+            this._computerBuilder.BuildDisk(Disk);
+            this._computerBuilder.BuildDisk(DiskType);
+   
+        
+      
+        }
+    }
+    //builder
 
     [UserValidationAttribute]
     public class Processor 
     {
-        public int serialNum, freq=1000, maxFreq=20000, Architech, Size,numEd;
+        public int serialNum, freq=1000, maxFreq=20000, Size,numEd;
+        private Architech architech = new Architech(StateArchitecture.X32);
         public string creator;
        
        
         public string model { get; set; }
-
+        internal Architech Architech { get => architech; set => architech = value; }
     }
-
-    public class Computer
+    //clone
+    interface IСlone<T>
+    {
+        T Clone();
+        
+    }
+    public class Computer:IСlone<Computer>
     {
         public Computer()
         {
+
+        }
+        public Computer(string type, string proc, string videocard, string RAMType, string DiskType, DateTime Date, int RAM, int Disk,Processor processor)
+        {
+            this.processor = processor;
+            this.type = type;
+            this.proc = proc;
+            this.RAMType = RAMType;
+            this.DiskType = DiskType;
+            this.Date = Date;
+            this.RAM = RAM;
+            this.Disk = Disk;
 
         }
         public string type, proc, videocard, RAMType, DiskType;
         public DateTime Date;
         public int RAM, Disk;
         public Processor processor;
-        public Computer(Processor processor)
+
+        public Computer Clone()
         {
-            this.processor = processor;
+            return new Computer(this.type, this.proc,this.videocard,this.RAMType,this.DiskType,this.Date,this.RAM,this.Disk,this.processor) ;
         }
 
-
-
+        
     }
+    //clone
     public class Serializer
     {
         public void MyXMLSerializer<T>(T obj,string name)
@@ -669,5 +806,308 @@ namespace Windows_Forms.Элементы_управления
 
         }
     }
-    
+    // singltone
+    class DezignDirector
+    {
+        public UserDezign userDezign { get; set; }
+        public void Start(Color ErrorColor, Color ClearColor)
+        {
+            userDezign = UserDezign.GetInstance(ErrorColor, ClearColor);
+        }
+    }
+    class UserDezign
+    {
+        private static UserDezign instance;
+        public Color ErrorColor { get; set; }
+        public Color ClearColor { get; set; }
+
+        protected UserDezign(Color ErrorColor,Color ClearColor)
+        {
+            this.ClearColor = ClearColor;
+            this.ErrorColor = ErrorColor;
+        }
+        public static UserDezign GetInstance(Color ErrorColor, Color ClearColor)
+        {
+            if (instance == null)
+            {
+                instance = new UserDezign (ErrorColor, ClearColor);
+            }
+            return instance;
+        }
+
+    }
+
+    // singltone
+
+    //factory
+    abstract class ComputerA
+    { }
+
+    abstract class ComputerB
+    { }
+
+    class ComputerA1 : ComputerA
+    { }
+
+    class ProcessorB1 : ComputerB
+    { }
+    abstract class AbstractFactory
+    {
+        public abstract ComputerA CreateProductA();
+        public abstract ComputerB CreateProductB();
+    }
+    class ComputerFactory : AbstractFactory
+    {
+        public override ComputerA CreateProductA()
+        {
+            return new ComputerA1();
+        }
+
+        public override ComputerB CreateProductB()
+        {
+            return new ProcessorB1();
+        }
+    }
+    class ProcessorFactory : AbstractFactory
+    {
+        public override ComputerA CreateProductA()
+        {
+            return new ComputerA1();
+        }
+
+        public override ComputerB CreateProductB()
+        {
+            return new ProcessorB1();
+        }
+    }
+
+    //factory
+
+
+    //command
+    interface ICommand
+    {
+        void Delete(int it);
+        void Exit();
+    }
+
+    class App
+    {
+        public void Delete(int it)
+        {
+            for (int i = 0; i <= it; i++)
+            {
+                File.Delete("Computer" + i + ".xml");
+                File.Delete("Processor" + i + ".xml");
+
+            }
+        }
+
+        public void Exit()
+        {
+            Application.Exit();
+        }
+    }
+    class AppOnComand:ICommand
+    {
+        App app;
+        public AppOnComand(App app)
+        {
+            this.app = app;
+        }
+
+        
+        public void Delete(int it)
+        {
+            app.Delete(it);
+        }
+
+        public void Exit()
+        {
+            app.Exit();
+        }
+    }
+    class Button
+    {
+        ICommand command;
+
+        public Button() { }
+
+        public void SetCommand(ICommand com)
+        {
+            command = com;
+        }
+
+        public void PressButton(int it)
+        {
+            command.Delete(it);
+        }
+        public void PressUndo()
+        {
+            command.Exit();
+        }
+    }
+    //command
+
+
+    //state
+    enum  StateArchitecture
+    {
+        X32=32,X64=64
+    }
+
+    class Architech
+    {
+        public StateArchitecture state;
+        public Architech(StateArchitecture state)
+        {
+            this.state = state;
+        }
+       
+        public int GetResult()
+        {
+            if (state == StateArchitecture.X32)
+                return 32;
+            else
+            if (state == StateArchitecture.X64)
+                return 64;
+            else
+                return 0;
+        }
+    }
+
+
+
+    class Client
+    {
+        public void Request(Target target)
+        {
+            target.Request();
+        }
+    }
+    // класс, к которому надо адаптировать другой класс   
+    class Target
+    {
+        public virtual void Request()
+        { }
+    }
+
+    // Адаптер
+    class Adapter : Target
+    {
+        private Adaptee adaptee = new Adaptee();
+
+        public override void Request()
+        {
+            adaptee.SpecificRequest();
+        }
+    }
+
+    // Адаптируемый класс
+    class Adaptee
+    {
+        public void SpecificRequest()
+        { }
+    }
+
+
+
+
+    // Decorator
+
+    abstract class Videocard
+    {
+        public Memento SaveState()
+        {
+            MessageBox.Show("Состояние сохранено - " + this.Cost + " цена ");
+            return new Memento(this.Cost);
+           
+        }
+        public Videocard(string n)
+        {
+            this.Name = n;
+        }
+        public string Name { get; protected set; }
+        public abstract int GetCost();
+        public int Cost;
+    }
+
+    class GtxVideocard : Videocard
+    {
+        new  int Cost = 1000;
+        public GtxVideocard() : base("GTX")
+        { }
+        public override int GetCost()
+        {
+            return Cost;
+        }
+    }
+    class Gtx302Videocard : Videocard
+    {
+        new int Cost = 2000;
+        public Gtx302Videocard()
+            : base("Gtx302")
+        { }
+        public override int GetCost()
+        {
+            return Cost;
+        }
+    }
+
+    abstract class VideocardDecorator : Videocard
+    {
+        protected Videocard Videocard;
+        public VideocardDecorator(string n, Videocard Videocard) : base(n)
+        {
+            this.Videocard = Videocard;
+        }
+    }
+
+    class GTX : VideocardDecorator
+    {
+        public GTX(Videocard p)
+            : base(p.Name + ", версия 324235", p)
+        { }
+
+        public override int GetCost()
+        {
+            return Videocard.GetCost() + 3;
+        }
+    }
+    //Memento
+
+    class Memento
+    {
+        public int Cost { get; private set; }
+        public Memento(int Cost)
+        {
+            this.Cost = Cost;
+           
+        }
+    }
+
+    //Strategy
+    interface IDriver
+    {
+        void Driver();
+    }
+
+    class DriverRf : IDriver
+    {
+        public void Driver()
+        {
+            Console.WriteLine("Драйверa rf");
+        }
+    }
+
+    class DriverSd : IDriver
+    {
+        public void Driver()
+        {
+            Console.WriteLine("Драйвера sd");
+        }
+    }
+    //
+
+
 }
